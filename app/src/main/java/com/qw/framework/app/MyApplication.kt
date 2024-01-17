@@ -10,6 +10,9 @@ import com.qw.framework.App
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        App.init(App.Builder(this))
+        App.init(
+            App.Builder(this)
+                .setDebug(BuildConfig.DEBUG)
+        )
     }
 }

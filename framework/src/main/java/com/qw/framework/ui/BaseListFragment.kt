@@ -1,7 +1,5 @@
 package com.qw.framework.ui
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +17,7 @@ import com.qw.recyclerview.layout.MyLinearLayoutManager
 import com.qw.recyclerview.layout.MyStaggeredGridLayoutManager
 import com.qw.recyclerview.swiperefresh.template.SwipeListCompat
 
-abstract class BaseListFragment<T> : BaseFragment(),
+abstract class BaseListFragment<T> : BaseFragment(R.layout.base_list_layout),
     OnRefreshListener, OnLoadMoreListener {
     private lateinit var mListComponent: SwipeListCompat<T>
     val adapter: BaseListAdapter
@@ -32,14 +30,6 @@ abstract class BaseListFragment<T> : BaseFragment(),
         }
     val smart: ISmartRecyclerView
         get() = mListComponent.smart
-
-    override fun getCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.base_list_layout, container, false)
-    }
 
     override fun initView(view: View) {
         val mRecyclerView = findViewById<RecyclerView>(R.id.mRecyclerView)

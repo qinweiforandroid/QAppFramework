@@ -2,9 +2,7 @@ package com.qw.framework.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -19,6 +17,15 @@ import com.qw.framework.uitls.L;
  */
 
 public abstract class BaseFragment extends Fragment implements IFragment {
+
+    public BaseFragment() {
+        super();
+    }
+
+    public BaseFragment(int contentLayoutId) {
+        super(contentLayoutId);
+    }
+
     private final String TAG = getClass().getSimpleName();
     /**
      * 数据加载状态
@@ -40,27 +47,6 @@ public abstract class BaseFragment extends Fragment implements IFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         d("onCreate");
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        d("onCreateView");
-        return getCreateView(inflater, container, savedInstanceState);
-    }
-
-    /**
-     * 创建视图
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     * @deprecated use {@link BaseFragment#onCreateView(LayoutInflater, ViewGroup, Bundle)}
-     */
-    @Nullable
-    protected View getCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return null;
     }
 
     @Override
