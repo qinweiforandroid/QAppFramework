@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.qw.framework.core.R
+import com.qw.framework.R
 import java.util.ArrayList
 
 /**

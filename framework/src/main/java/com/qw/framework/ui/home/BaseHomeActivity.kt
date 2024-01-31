@@ -3,7 +3,7 @@ package com.qw.framework.ui.home
 import android.content.Intent
 import android.os.Bundle
 import com.qw.framework.App
-import com.qw.framework.core.R
+import com.qw.framework.R
 import com.qw.framework.ui.BaseActivity
 import com.qw.framework.uitls.L
 import com.qw.widget.tab.BaseTab

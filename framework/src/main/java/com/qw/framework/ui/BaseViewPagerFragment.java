@@ -9,7 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
 
-import com.qw.framework.core.R;
+import com.qw.framework.R;
 
 import java.util.ArrayList;
 

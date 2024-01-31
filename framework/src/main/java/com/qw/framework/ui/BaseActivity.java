@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.qw.framework.App;
-import com.qw.framework.core.R;
+import com.qw.framework.R;
 import com.qw.framework.ThemeCompat;
 import com.qw.framework.uitls.L;
 

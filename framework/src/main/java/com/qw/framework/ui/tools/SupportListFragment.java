@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-import com.qw.framework.core.R;
+import com.qw.framework.R;
 import com.qw.framework.ui.BaseFragment;
 
 import java.util.ArrayList;

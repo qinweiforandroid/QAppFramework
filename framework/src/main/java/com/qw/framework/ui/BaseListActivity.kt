@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.qw.framework.core.R
+import com.qw.framework.R
 import com.qw.recyclerview.core.BaseListAdapter
 import com.qw.recyclerview.core.BaseViewHolder
 import com.qw.recyclerview.core.ISmartRecyclerView

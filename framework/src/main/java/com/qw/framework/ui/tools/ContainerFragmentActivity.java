@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.qw.framework.core.R;
+import com.qw.framework.R;
 import com.qw.framework.ui.BaseActivity;
 import com.qw.framework.ui.BaseFragment;
 

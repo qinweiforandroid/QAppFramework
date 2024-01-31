@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.qw.framework.core.R;
+import com.qw.framework.R;
 import com.qw.framework.ui.BaseActivity;
 
 import java.util.ArrayList;

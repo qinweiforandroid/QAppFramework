@@ -7,7 +7,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 
-import com.qw.framework.core.R;
+import com.qw.framework.R;
 
 import java.util.ArrayList;
 
