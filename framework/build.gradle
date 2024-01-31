@@ -1,11 +1,11 @@
 plugins {
     id 'com.android.library'
-    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
     compileSdk rootProject.ext.compileSdkVersion
-
+    namespace 'com.qw.framework'
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -27,7 +27,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    namespace 'com.qw.framework'
+
 }
 
 dependencies {
