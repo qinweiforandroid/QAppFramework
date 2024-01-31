@@ -1,10 +1,11 @@
-package com.qw.framework.ui;
+package com.qw.framework.ui.tools;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.qw.framework.core.R;
+import com.qw.framework.ui.BaseActivity;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class FragmentListActivity extends BaseActivity {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        ArrayList<ContainerFragmentActivity.Clazz> cs = (ArrayList<ContainerFragmentActivity.Clazz>) getIntent().getSerializableExtra("cs");
+        ArrayList<ContainerClazz> cs = (ArrayList<ContainerClazz>) getIntent().getSerializableExtra("cs");
         if (getSupportFragmentManager().findFragmentByTag("SupportListFragment") == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.content, SupportListFragment.newInstance(cs), "SupportListFragment").commit();
         }
@@ -37,11 +38,11 @@ public class FragmentListActivity extends BaseActivity {
         return getIntent().getBooleanExtra("isDisplayHomeAsUpEnabled", false);
     }
 
-    public static void startActivity(Context context, ArrayList<ContainerFragmentActivity.Clazz> cs) {
+    public static void startActivity(Context context, ArrayList<ContainerClazz> cs) {
         startActivity(context, cs, true);
     }
 
-    public static void startActivity(Context context, ArrayList<ContainerFragmentActivity.Clazz> cs, boolean isDisplayHomeAsUpEnabled) {
+    public static void startActivity(Context context, ArrayList<ContainerClazz> cs, boolean isDisplayHomeAsUpEnabled) {
         Intent intent = new Intent(context, FragmentListActivity.class);
         intent.putExtra("cs", cs);
         intent.putExtra("isDisplayHomeAsUpEnabled", isDisplayHomeAsUpEnabled);

@@ -1,4 +1,4 @@
-package com.qw.framework.ui;
+package com.qw.framework.ui.tools;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 
 import com.qw.framework.core.R;
+import com.qw.framework.ui.BaseFragment;
 
 import java.util.ArrayList;
 
@@ -25,10 +26,10 @@ import java.util.ArrayList;
 
 public class SupportListFragment extends BaseFragment implements AdapterView.OnItemClickListener {
     private ListView mMainLsv;
-    private ArrayList<ContainerFragmentActivity.Clazz> modules = new ArrayList<>();
+    private ArrayList<ContainerClazz> modules = new ArrayList<>();
     private DataAdapter adapter;
 
-    public static Fragment newInstance(ArrayList<ContainerFragmentActivity.Clazz> cs) {
+    public static Fragment newInstance(ArrayList<ContainerClazz> cs) {
         SupportListFragment fragment = new SupportListFragment();
         Bundle args = new Bundle();
         args.putSerializable("cs", cs);
@@ -52,14 +53,14 @@ public class SupportListFragment extends BaseFragment implements AdapterView.OnI
 
     @Override
     public void initData() {
-        ArrayList<ContainerFragmentActivity.Clazz> cs = (ArrayList<ContainerFragmentActivity.Clazz>) getArguments().getSerializable("cs");
+        ArrayList<ContainerClazz> cs = (ArrayList<ContainerClazz>) getArguments().getSerializable("cs");
         modules.addAll(cs);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ContainerFragmentActivity.Clazz info = (ContainerFragmentActivity.Clazz) parent.getAdapter().getItem(position);
+        ContainerClazz info = (ContainerClazz) parent.getAdapter().getItem(position);
         startActivity(ContainerFragmentActivity.getIntent(getContext(), info));
     }
 
@@ -103,7 +104,7 @@ public class SupportListFragment extends BaseFragment implements AdapterView.OnI
         }
 
         public void initData(int position) {
-            mMainItemLabel.setText(modules.get(position).title);
+            mMainItemLabel.setText(modules.get(position).getTitle());
         }
     }
 }

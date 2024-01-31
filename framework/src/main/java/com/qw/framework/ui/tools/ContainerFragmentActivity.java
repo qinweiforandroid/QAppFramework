@@ -1,13 +1,15 @@
-package com.qw.framework.ui;
+package com.qw.framework.ui.tools;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.text.TextUtils;
 
 import com.qw.framework.core.R;
+import com.qw.framework.ui.BaseActivity;
+import com.qw.framework.ui.BaseFragment;
 
-import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 
 
 /**
@@ -16,13 +18,13 @@ import java.io.Serializable;
 public class ContainerFragmentActivity extends BaseActivity {
     public static final String KEY_FRAGMENT_CLAZZ = "key_fragment_clazz";
     public static final String KEY_FRAGMENT_ARGS = "key_fragment_args";
-    private Clazz clazz;
+    private ContainerClazz clazz;
     private BaseFragment fragment;
 
     @Override
     protected void setContentView() {
-        clazz = (Clazz) getIntent().getSerializableExtra(KEY_FRAGMENT_CLAZZ);
-        setContentView(R.layout.base_container_activity, clazz.hasTitle);
+        clazz = (ContainerClazz) getIntent().getSerializableExtra(KEY_FRAGMENT_CLAZZ);
+        setContentView(R.layout.base_container_activity, !TextUtils.isEmpty(clazz.getTitle()));
     }
 
     @Override
@@ -33,17 +35,18 @@ public class ContainerFragmentActivity extends BaseActivity {
     @Override
     protected void initData(Bundle savedInstanceState) {
         Bundle args = getIntent().getBundleExtra(KEY_FRAGMENT_ARGS);
-        if (clazz.hasTitle) {
-            setTitle(clazz.title);
+        if (!TextUtils.isEmpty(clazz.getTitle())) {
+            setTitle(clazz.getTitle());
         }
         try {
-            fragment = clazz.clazz.newInstance();
+            fragment = clazz.getFragmentClazz().getDeclaredConstructor().newInstance();
             if (args != null) {
                 fragment.setArguments(args);
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException |
+                 NoSuchMethodException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -54,7 +57,7 @@ public class ContainerFragmentActivity extends BaseActivity {
         }
     }
 
-    public static Intent getIntent(Context context, Clazz clazz, Bundle args) {
+    public static Intent getIntent(Context context, ContainerClazz clazz, Bundle args) {
         Intent intent = new Intent(context, ContainerFragmentActivity.class);
         intent.putExtra(KEY_FRAGMENT_CLAZZ, clazz);
         if (args != null) {
@@ -63,20 +66,9 @@ public class ContainerFragmentActivity extends BaseActivity {
         return intent;
     }
 
-    public static Intent getIntent(Context context, Clazz clazz) {
+    public static Intent getIntent(Context context, ContainerClazz clazz) {
         return getIntent(context, clazz, null);
     }
 
 
-    public static class Clazz implements Serializable {
-        public Class<? extends BaseFragment> clazz;
-        public boolean hasTitle;
-        public String title;
-
-        public Clazz(String title, Class<? extends BaseFragment> clazz) {
-            this.clazz = clazz;
-            this.hasTitle = true;
-            this.title = title;
-        }
-    }
 }

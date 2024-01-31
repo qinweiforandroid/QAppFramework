@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <activity android:name="com.qw.framework.ui.ContainerFragmentActivity" />
-        <activity android:name="com.qw.framework.ui.FragmentListActivity" />
+        <activity android:name="com.qw.framework.ui.tools.ContainerFragmentActivity" />
+        <activity android:name="com.qw.framework.ui.tools.FragmentListActivity" />
     </application>
 </manifest>
