@@ -15,11 +15,12 @@ import com.qw.recyclerview.footer.DefaultLoadMore
 import com.qw.recyclerview.layout.MyGridLayoutManager
 import com.qw.recyclerview.layout.MyLinearLayoutManager
 import com.qw.recyclerview.layout.MyStaggeredGridLayoutManager
+import com.qw.recyclerview.loadmore.AbsLoadMore
 import com.qw.recyclerview.swiperefresh.template.SwipeListCompat
 
 abstract class BaseListFragment<T> : BaseFragment(R.layout.base_list_layout),
     OnRefreshListener, OnLoadMoreListener {
-    private lateinit var mListComponent: SwipeListCompat<T>
+    protected lateinit var mListComponent: SwipeListCompat<T>
     val adapter: BaseListAdapter
         get() {
             return mListComponent.adapter
@@ -48,11 +49,15 @@ abstract class BaseListFragment<T> : BaseFragment(R.layout.base_list_layout),
                 )
             }
         }
-        mListComponent.supportLoadMore(DefaultLoadMore(), this)
+        mListComponent.supportLoadMore(getLoadMore(), this)
         smart.setLayoutManager(getLinearLayoutManager())
             .setRefreshEnable(false)
             .setLoadMoreEnable(false)
             .setOnRefreshListener(this)
+    }
+
+    open fun getLoadMore(): AbsLoadMore {
+        return DefaultLoadMore()
     }
 
     override fun initData() {

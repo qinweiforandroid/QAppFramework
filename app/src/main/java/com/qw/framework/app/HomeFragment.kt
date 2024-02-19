@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.qw.framework.app.home.MainTabViewPagerActivity
 import com.qw.framework.ui.BaseListFragment
 import com.qw.recyclerview.core.BaseViewHolder
+import com.qw.recyclerview.footer.DefaultLoadMore
+import com.qw.recyclerview.loadmore.AbsLoadMore
 
 /**
  * Created by qinwei on 2024/1/16 21:22
@@ -40,6 +42,10 @@ class HomeFragment : BaseListFragment<ActivityInfo>() {
 
     override fun initData() {
 
+    }
+
+    override fun getLoadMore(): AbsLoadMore {
+        return DefaultLoadMore()
     }
 
     override fun onCreateBaseViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
