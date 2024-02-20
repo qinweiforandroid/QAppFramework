@@ -1,4 +1,4 @@
-package com.qw.framework.app
+package com.qw.framework.app.home
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -7,6 +7,7 @@ import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
 import android.webkit.WebView
 import android.widget.Toast
+import com.qw.framework.app.R
 import com.qw.framework.ui.BaseFragment
 
 

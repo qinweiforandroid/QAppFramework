@@ -1,4 +1,4 @@
-package com.qw.framework.app.home
+package com.qw.framework.app.viewpager
 
 import android.os.Bundle
 import android.view.View

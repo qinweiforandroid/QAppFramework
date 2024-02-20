@@ -1,8 +1,7 @@
-package com.qw.framework.app
+package com.qw.framework.app.home
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import com.qw.framework.app.R
 import com.qw.framework.ui.home.BaseHomeActivity
 import com.qw.widget.tab.BaseTab
 import com.qw.widget.tab.TabView
@@ -22,17 +21,14 @@ class MainActivity : BaseHomeActivity() {
                 .builder()
         )
 //        tabs.add(EmptyTabView.Tab.newTab())
-//        tabs.add(
-//            TabView.Tab.Builder()
-//                .setImgResId(R.drawable.selector_tab_frame_btn)
-//                .setLabelResId(R.string.app_home_frame)
-//                .setLabelColorResId(R.color.selector_tab_label)
-//                .setArguments(Bundle().apply {
-//                    putSerializable("cs", Clazz.genClazzList())
-//                })
-//                .setClazz(SupportListFragment::class.java)
-//                .builder()
-//        )
+        tabs.add(
+            TabView.Tab.Builder()
+                .setImgResId(R.drawable.selector_tab_frame_btn)
+                .setLabelResId(R.string.tab_biz)
+                .setLabelColorResId(R.color.selector_tab_label)
+                .setClazz(ProjectFragment::class.java)
+                .builder()
+        )
 
         tabs.add(
             TabView.Tab.Builder()
