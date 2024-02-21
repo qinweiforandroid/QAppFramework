@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.qw.framework.app.R
 import com.qw.framework.ui.BaseViewPager2Activity
+import com.qw.framework.uitls.L
 import com.qw.widget.tab.BaseTab
 import com.qw.widget.tab.TabLayout
 import com.qw.widget.tab.TabView
@@ -58,8 +59,13 @@ class MainTabViewPagerActivity : BaseViewPager2Activity<BaseTab>(),
         mTabLayout.setCurrentTab(position)
     }
 
-    override fun onTabItemClick(currentIndex: Int, tab: BaseTab?) {
-        mViewPager.setCurrentItem(currentIndex, false)
+    override fun onTabItemClick(currentIndex: Int): Boolean {
+        L.d("onTabItemClick:${currentIndex}")
+        return true
+    }
+
+    override fun onTabSwitched(newIndex: Int, oldIndex: Int) {
+        mViewPager.setCurrentItem(newIndex, false)
     }
 
     override fun getFragmentAtPosition(position: Int): Fragment {

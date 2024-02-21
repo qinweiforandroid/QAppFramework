@@ -46,20 +46,27 @@ abstract class BaseHomeActivity : BaseActivity(), TabLayout.OnTabClickListener {
 
     abstract fun initTabs(tabs: ArrayList<BaseTab>)
 
-    override fun onTabItemClick(index: Int, tab: BaseTab) {
+    override fun onTabItemClick(index: Int): Boolean {
+        return true
+    }
+
+    override fun onTabSwitched(newIndex: Int, oldIndex: Int) {
         try {
+            val tab = tabs[newIndex]
             val fm = supportFragmentManager
             val ft = fm.beginTransaction()
-            var to = fm.findFragmentByTag(index.toString())
+            var to = fm.findFragmentByTag(newIndex.toString())
             val from = fm.findFragmentByTag(currentIndex.toString())
             if (to == null) {
                 to = tab.clazz.getDeclaredConstructor().newInstance()
                 to.arguments = tab.args
                 if (from == null) {
-                    ft.add(R.id.mFragmentContainer, to, index.toString()).commitAllowingStateLoss()
+                    ft.add(R.id.mFragmentContainer,
+                        to,
+                        newIndex.toString()).commitAllowingStateLoss()
                 } else {
                     ft.hide(from)
-                        .add(R.id.mFragmentContainer, to, index.toString())
+                        .add(R.id.mFragmentContainer, to, newIndex.toString())
                         .commitAllowingStateLoss()
                 }
             } else {
@@ -67,7 +74,7 @@ abstract class BaseHomeActivity : BaseActivity(), TabLayout.OnTabClickListener {
             }
             setMenuId(tab.menuId)
             setTitle(tab.labelResId)
-            currentIndex = index
+            currentIndex = newIndex
         } catch (e: InstantiationException) {
             e.printStackTrace()
         } catch (e: IllegalAccessException) {
@@ -86,11 +93,11 @@ abstract class BaseHomeActivity : BaseActivity(), TabLayout.OnTabClickListener {
         val action = intent.getIntExtra(App.KEY_ACTION, App.ACTION_RESTART_APP)
         L.d("onNewIntent")
         when (action) {
-            App.ACTION_RESTART_APP -> protectApp()
+            App.ACTION_RESTART_APP  -> protectApp()
             App.ACTION_BACK_TO_HOME -> backToHome()
-            App.ACTION_KICK_OUT -> kickOut()
-            App.ACTION_LOGOUT -> logout()
-            else -> {
+            App.ACTION_KICK_OUT     -> kickOut()
+            App.ACTION_LOGOUT       -> logout()
+            else                    -> {
                 handlerAction(action, intent)
             }
         }
