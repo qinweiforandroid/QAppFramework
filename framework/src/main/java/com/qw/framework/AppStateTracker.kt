@@ -40,6 +40,20 @@ object AppStateTracker {
                 }
             }
 
+            override fun onActivityResumed(activity: Activity) {
+                super.onActivityResumed(activity)
+                activityLifecycleCallbacks.forEach {
+                    it.onActivityResumed(activity)
+                }
+            }
+
+            override fun onActivityPaused(activity: Activity) {
+                super.onActivityPaused(activity)
+                activityLifecycleCallbacks.forEach {
+                    it.onActivityPaused(activity)
+                }
+            }
+
             override fun onActivityStopped(activity: Activity) {
                 activityLifecycleCallbacks.forEach {
                     it.onActivityStopped(activity)
@@ -156,6 +170,8 @@ object AppStateTracker {
         fun onActivityStopped(activity: Activity)
 
         fun onActivityDestroyed(activity: Activity)
+        fun onActivityResumed(activity: Activity) {}
+        fun onActivityPaused(activity: Activity) {}
     }
 
     private open class AbsActivityLifecycleCallbacks : Application.ActivityLifecycleCallbacks {
