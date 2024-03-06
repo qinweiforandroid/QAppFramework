@@ -6,8 +6,8 @@ import com.qw.framework.App
 import com.qw.framework.R
 import com.qw.framework.ui.BaseActivity
 import com.qw.framework.uitls.L
-import com.qw.widget.tab.BaseTab
-import com.qw.widget.tab.TabLayout
+import com.qw.framework.widget.BaseTab
+import com.qw.framework.widget.TabLayout
 
 /**
  * Created by qinwei on 2016/10/17 11:13

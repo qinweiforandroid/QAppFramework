@@ -33,7 +33,6 @@ android {
 dependencies {
     api "androidx.appcompat:appcompat:$versions.appcompat"
     api "com.google.android.material:material:$versions.material"
-    api 'com.github.qinweiforandroid:QTab:1.2.0221'
 
     //核心组件（必须）
     api 'com.github.qinweiforandroid.SmartRefreshRecyclerView:recyclerview-core:4.0.11203'

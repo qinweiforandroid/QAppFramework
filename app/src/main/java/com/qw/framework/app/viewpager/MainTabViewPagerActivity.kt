@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import com.qw.framework.app.R
 import com.qw.framework.ui.BaseViewPager2Activity
 import com.qw.framework.uitls.L
-import com.qw.widget.tab.BaseTab
-import com.qw.widget.tab.TabLayout
-import com.qw.widget.tab.TabView
+import com.qw.framework.widget.BaseTab
+import com.qw.framework.widget.TabLayout
+import com.qw.framework.widget.TabView
 
 /**
  * Created by qinwei on 2024/1/17 21:55

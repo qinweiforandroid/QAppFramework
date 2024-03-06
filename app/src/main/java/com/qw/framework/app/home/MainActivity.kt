@@ -3,8 +3,8 @@ package com.qw.framework.app.home
 import android.content.Intent
 import com.qw.framework.app.R
 import com.qw.framework.ui.home.BaseHomeActivity
-import com.qw.widget.tab.BaseTab
-import com.qw.widget.tab.TabView
+import com.qw.framework.widget.BaseTab
+import com.qw.framework.widget.TabView
 
 class MainActivity : BaseHomeActivity() {
     override fun setContentView() {
