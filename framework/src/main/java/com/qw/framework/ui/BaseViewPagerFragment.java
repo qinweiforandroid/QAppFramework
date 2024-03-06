@@ -16,6 +16,10 @@ import java.util.ArrayList;
 /**
  * Created by qinwei on 2016/4/6 18:21
  * email:qinwei_it@163.com
+ *
+ * @see BaseViewPager2Fragment
+ * @deprecated As of JDK version 1.0.0306
+ * replaced by {@code BaseViewPager2Fragment}.
  */
 public abstract class BaseViewPagerFragment<T> extends BaseFragment implements ViewPager.OnPageChangeListener {
     protected DataPageAdapter adapter;

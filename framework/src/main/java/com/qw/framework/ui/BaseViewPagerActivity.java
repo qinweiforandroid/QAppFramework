@@ -14,6 +14,10 @@ import java.util.ArrayList;
 /**
  * Created by qinwei on 2016/4/6 18:21
  * email:qinwei_it@163.com
+ *
+ * @see BaseViewPager2Activity
+ * @deprecated As of JDK version 1.0.0306
+ * replaced by {@code BaseViewPager2Activity}.
  */
 public abstract class BaseViewPagerActivity<T> extends BaseActivity implements ViewPager.OnPageChangeListener {
     protected DataPageAdapter adapter;
