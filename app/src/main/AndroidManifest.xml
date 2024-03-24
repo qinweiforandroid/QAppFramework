@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-<!--    Android 13版本适配，细化存储权限-->
+    <!--    Android 13版本适配，细化存储权限-->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
@@ -55,6 +55,10 @@
         <activity
             android:name=".viewpager.MainTabViewPagerActivity"
             android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".list.ArticleListActivity"
+            android:exported="true"
             android:screenOrientation="portrait" />
     </application>
 

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.qw.framework.app.R
+import com.qw.framework.app.list.ArticleListActivity
 import com.qw.framework.app.viewpager.MainTabViewPagerActivity
 import com.qw.framework.ui.BaseListFragment
 import com.qw.recyclerview.core.BaseViewHolder
@@ -21,17 +22,14 @@ import com.qw.recyclerview.loadmore.AbsLoadMore
  * email: qinwei_it@163.com
  */
 class HomeFragment : BaseListFragment<ActivityInfo>() {
+    val cover =
+        "https://img2.baidu.com/it/u=762599636,1175376405&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=680"
 
     override fun initView(view: View) {
         super.initView(view)
         smart.setLayoutManager(getGridLayoutManager(2))
-        modules.add(
-            ActivityInfo(
-                MainTabViewPagerActivity::class.java,
-                "MainTabViewPager",
-                "https://img2.baidu.com/it/u=762599636,1175376405&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=680"
-            )
-        )
+        modules.add(ActivityInfo(MainTabViewPagerActivity::class.java, "ViewPager首页", cover))
+        modules.add(ActivityInfo(ArticleListActivity::class.java, "玩Android", cover))
         adapter.notifyDataSetChanged()
     }
 
@@ -73,10 +71,12 @@ class HomeFragment : BaseListFragment<ActivityInfo>() {
 
         override fun onClick(v: View) {
             val intent = Intent(context, item.clazz)
+            intent.putExtra("title", item.title)
             startActivity(intent)
         }
     }
 }
+
 data class ActivityInfo(
     val clazz: Class<out AppCompatActivity>,
     val title: String,

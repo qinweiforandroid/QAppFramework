@@ -3,7 +3,6 @@ package com.qw.framework.ui
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.qw.framework.R
 import com.qw.recyclerview.core.BaseListAdapter
@@ -14,13 +13,13 @@ import com.qw.recyclerview.core.OnRefreshListener
 import com.qw.recyclerview.footer.DefaultLoadMore
 import com.qw.recyclerview.layout.MyGridLayoutManager
 import com.qw.recyclerview.layout.MyLinearLayoutManager
-import com.qw.recyclerview.layout.MyStaggeredGridLayoutManager
 import com.qw.recyclerview.loadmore.AbsLoadMore
-import com.qw.recyclerview.swiperefresh.template.SwipeListCompat
+import com.qw.recyclerview.swiperefresh.SwipeRecyclerView
+import com.qw.recyclerview.template.SmartListCompat
 
-abstract class BaseListActivity<T> : BaseActivity(),
-    OnRefreshListener, OnLoadMoreListener {
-    protected lateinit var mListComponent: SwipeListCompat<T>
+abstract class BaseListActivity<T> : BaseActivity(), OnRefreshListener, OnLoadMoreListener {
+    private var mPageViewModel: IPaging? = null
+    protected lateinit var mListComponent: SmartListCompat<T>
     val adapter: BaseListAdapter
         get() {
             return mListComponent.adapter
@@ -29,17 +28,16 @@ abstract class BaseListActivity<T> : BaseActivity(),
         get() {
             return mListComponent.modules
         }
-    val smart: ISmartRecyclerView
-        get() = mListComponent.smart
-
+    lateinit var smart: ISmartRecyclerView
     override fun setContentView() {
-        setContentView(R.layout.base_list_layout, true)
+        setContentView(R.layout.recyclerview_swiperefresh_layout, true)
     }
 
     override fun initView() {
         val mRecyclerView = findViewById<RecyclerView>(R.id.mRecyclerView)
         val mSwipeRefresh = findViewById<SwipeRefreshLayout>(R.id.mSwipeRefreshLayout)
-        mListComponent = object : SwipeListCompat<T>(mRecyclerView, mSwipeRefresh) {
+        smart = SwipeRecyclerView(mRecyclerView, mSwipeRefresh)
+        mListComponent = object : SmartListCompat<T>(smart) {
 
             override fun getItemViewTypeByPosition(position: Int): Int {
                 return this@BaseListActivity.getItemViewTypeByPosition(position)
@@ -52,10 +50,8 @@ abstract class BaseListActivity<T> : BaseActivity(),
                 )
             }
         }
-        mListComponent.supportLoadMore(getLoadMore(), this)
-        smart.setLayoutManager(getLinearLayoutManager())
-            .setRefreshEnable(false)
-            .setLoadMoreEnable(false)
+        mListComponent.setUpLoadMore(getLoadMore())
+            .setOnLoadMoreListener(this)
             .setOnRefreshListener(this)
     }
 
@@ -66,8 +62,18 @@ abstract class BaseListActivity<T> : BaseActivity(),
     override fun initData(savedInstanceState: Bundle?) {
     }
 
-    override fun onRefresh() {}
-    override fun onLoadMore() {}
+    fun injectPaging(vm: IPaging) {
+        this.mPageViewModel = vm
+        mListComponent.setUpPage(vm.getPaging())
+    }
+
+    override fun onRefresh() {
+        mPageViewModel?.onRefresh()
+    }
+
+    override fun onLoadMore() {
+        mPageViewModel?.onLoadMore()
+    }
 
     open fun getItemViewTypeByPosition(position: Int): Int {
         return 0
@@ -75,15 +81,7 @@ abstract class BaseListActivity<T> : BaseActivity(),
 
     abstract fun onCreateBaseViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder
 
-    fun getLinearLayoutManager(): MyLinearLayoutManager {
-        return MyLinearLayoutManager(this)
-    }
-
     open fun getGridLayoutManager(spanCount: Int): MyGridLayoutManager {
         return mListComponent.getGridLayoutManager(spanCount)
-    }
-
-    fun getStaggeredGridLayoutManager(spanCount: Int): MyStaggeredGridLayoutManager {
-        return MyStaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
     }
 }

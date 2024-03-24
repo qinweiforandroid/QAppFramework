@@ -3,7 +3,6 @@ package com.qw.framework.ui
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.qw.framework.R
 import com.qw.recyclerview.core.BaseListAdapter
@@ -14,13 +13,14 @@ import com.qw.recyclerview.core.OnRefreshListener
 import com.qw.recyclerview.footer.DefaultLoadMore
 import com.qw.recyclerview.layout.MyGridLayoutManager
 import com.qw.recyclerview.layout.MyLinearLayoutManager
-import com.qw.recyclerview.layout.MyStaggeredGridLayoutManager
 import com.qw.recyclerview.loadmore.AbsLoadMore
-import com.qw.recyclerview.swiperefresh.template.SwipeListCompat
+import com.qw.recyclerview.swiperefresh.SwipeRecyclerView
+import com.qw.recyclerview.template.SmartListCompat
 
-abstract class BaseListFragment<T> : BaseFragment(R.layout.base_list_layout),
+abstract class BaseListFragment<T> : BaseFragment(R.layout.recyclerview_swiperefresh_layout),
     OnRefreshListener, OnLoadMoreListener {
-    protected lateinit var mListComponent: SwipeListCompat<T>
+    protected lateinit var mListComponent: SmartListCompat<T>
+    private var mPageViewModel: IPaging? = null
     val adapter: BaseListAdapter
         get() {
             return mListComponent.adapter
@@ -29,13 +29,13 @@ abstract class BaseListFragment<T> : BaseFragment(R.layout.base_list_layout),
         get() {
             return mListComponent.modules
         }
-    val smart: ISmartRecyclerView
-        get() = mListComponent.smart
+    lateinit var smart: ISmartRecyclerView
 
     override fun initView(view: View) {
         val mRecyclerView = findViewById<RecyclerView>(R.id.mRecyclerView)
         val mSwipeRefresh = findViewById<SwipeRefreshLayout>(R.id.mSwipeRefreshLayout)
-        mListComponent = object : SwipeListCompat<T>(mRecyclerView, mSwipeRefresh) {
+        smart = SwipeRecyclerView(mRecyclerView, mSwipeRefresh)
+        mListComponent = object : SmartListCompat<T>(smart) {
 
             override fun getItemViewTypeByPosition(position: Int): Int {
                 return this@BaseListFragment.getItemViewTypeByPosition(position)
@@ -49,10 +49,9 @@ abstract class BaseListFragment<T> : BaseFragment(R.layout.base_list_layout),
                 )
             }
         }
-        mListComponent.supportLoadMore(getLoadMore(), this)
-        smart.setLayoutManager(getLinearLayoutManager())
-            .setRefreshEnable(false)
-            .setLoadMoreEnable(false)
+        mListComponent.setUpLayoutManager(getLinearLayoutManager())
+            .setUpLoadMore(getLoadMore())
+            .setOnLoadMoreListener(this)
             .setOnRefreshListener(this)
     }
 
@@ -64,8 +63,18 @@ abstract class BaseListFragment<T> : BaseFragment(R.layout.base_list_layout),
 
     }
 
-    override fun onRefresh() {}
-    override fun onLoadMore() {}
+    fun injectPaging(vm: IPaging) {
+        this.mPageViewModel = vm
+        mListComponent.setUpPage(vm.getPaging())
+    }
+
+    override fun onRefresh() {
+        mPageViewModel?.onRefresh()
+    }
+
+    override fun onLoadMore() {
+        mPageViewModel?.onLoadMore()
+    }
 
     open fun getItemViewTypeByPosition(position: Int): Int {
         return 0
@@ -79,9 +88,5 @@ abstract class BaseListFragment<T> : BaseFragment(R.layout.base_list_layout),
 
     open fun getGridLayoutManager(spanCount: Int): MyGridLayoutManager {
         return mListComponent.getGridLayoutManager(spanCount)
-    }
-
-    fun getStaggeredGridLayoutManager(spanCount: Int): MyStaggeredGridLayoutManager {
-        return MyStaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
     }
 }

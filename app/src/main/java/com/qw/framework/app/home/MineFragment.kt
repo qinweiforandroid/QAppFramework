@@ -1,6 +1,5 @@
 package com.qw.framework.app.home
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.view.View
 import android.webkit.CookieManager
@@ -17,13 +16,12 @@ import com.qw.framework.ui.BaseFragment
  */
 class MineFragment : BaseFragment(R.layout.tab_mine_fragment) {
 
-    @SuppressLint("SetJavaScriptEnabled")
     override fun initView(view: View) {
         val mWebView = view.findViewById<WebView>(R.id.mWebView)
         val webSettings = mWebView.settings
         // 设置与Js交互的权限
         webSettings.javaScriptEnabled = true
-        val url = "https://www.famkools.com/downloadApp"
+        val url = "https://www.baidu.com"
         setCookie(url)
         mWebView.loadUrl(url)
     }

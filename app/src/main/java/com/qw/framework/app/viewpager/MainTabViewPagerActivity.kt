@@ -19,11 +19,12 @@ class MainTabViewPagerActivity : BaseViewPager2Activity<BaseTab>(),
     private lateinit var mTabLayout: TabLayout
 
     override fun setContentView() {
-        setContentView(R.layout.activity_main_tab_with_viewpager2)
+        setContentView(R.layout.activity_main_tab_with_viewpager2, true)
     }
 
     override fun initView() {
         super.initView()
+        setTitle(intent.getStringExtra("title"))
         mViewPager.isUserInputEnabled = false
         mTabLayout = findViewById(R.id.mTabLayout)
     }
