@@ -22,7 +22,5 @@ interface IFragment {
 
     fun onRestoreInstanceState(savedInstanceState: Bundle)
 
-    open fun onBackPressed(): Boolean {
-        return false
-    }
+    open fun onBackPressed() = false
 }

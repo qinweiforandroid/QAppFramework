@@ -12,22 +12,20 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 /**
- * fragment封装
+ * BottomSheetDialogFragment封装
  * Created by qinwei on 2017/4/16.
  */
 abstract class BaseBottomSheetDialogFragment(@LayoutRes private val contentLayoutId: Int) :
-    IFragment, BottomSheetDialogFragment() {
+    BottomSheetDialogFragment(), IFragment {
 
     private var isDataInitialed = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initStyle()
     }
 
-    open fun initStyle() {
-    }
+    open fun initStyle() {}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -47,35 +45,26 @@ abstract class BaseBottomSheetDialogFragment(@LayoutRes private val contentLayou
         isDataInitialed = true
     }
 
-    open fun isDraggable() = true
-
-    open fun peekHeight() = 0
-    open fun maxHeight() = 0
-    open fun skipCollapsed() = true
-
-    open fun state() = BottomSheetBehavior.STATE_EXPANDED
-
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return (super.onCreateDialog(savedInstanceState) as BottomSheetDialog).apply {
-            if (peekHeight() > 0) {
-                behavior.peekHeight = peekHeight()
-            }
-            behavior.skipCollapsed = skipCollapsed()
-            behavior.isDraggable = isDraggable()
-            behavior.state = state()
-            if (maxHeight() > 0) {
-                window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, maxHeight())
-                window!!.setGravity(Gravity.BOTTOM)
-            }
+            initDialog(this)
+            //控制行为
+//            behavior.peekHeight
+//            behavior.skipCollapsed
+//            behavior.isDraggable
+//            behavior.state
+            //控制窗口大小
+//            window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, maxHeight())
+//            window!!.setGravity(Gravity.BOTTOM)
         }
     }
 
+    /**
+     * call from onCreateDialog
+     */
+    open fun initDialog(bottomSheetDialog: BottomSheetDialog) {}
+
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         isDataInitialed = true
-    }
-
-    override fun onBackPressed(): Boolean {
-        return super.onBackPressed()
     }
 }

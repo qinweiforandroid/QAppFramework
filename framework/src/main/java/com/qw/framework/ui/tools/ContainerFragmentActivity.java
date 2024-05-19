@@ -39,7 +39,7 @@ public class ContainerFragmentActivity extends BaseActivity {
             setTitle(clazz.getTitle());
         }
         try {
-            fragment = clazz.getFragmentClazz().getDeclaredConstructor().newInstance();
+            fragment = clazz.getClazz().getDeclaredConstructor().newInstance();
             if (args != null) {
                 fragment.setArguments(args);
             }
