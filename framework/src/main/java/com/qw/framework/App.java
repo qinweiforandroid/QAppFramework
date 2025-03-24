@@ -24,6 +24,10 @@ public class App {
 
     public static final String KEY_ACTION = "key_action";
     /**
+     * 未知
+     */
+    public static final int ACTION_UNKNOWN = -1;
+    /**
      * 重新启动
      */
     public static final int ACTION_RESTART_APP = 0;

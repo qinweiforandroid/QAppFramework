@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btn_dialog1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Style1" />
+
+    <Button
+        android:id="@+id/btn_dialog2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Style1" />
+
+    <Button
+        android:id="@+id/btn_dialog3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Style1" />
+
+    <Button
+        android:id="@+id/btn_dialog4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Style1242442424" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="btn_dialog1,btn_dialog2,btn_dialog3,btn_dialog4"
+        app:flow_horizontalGap="4dp"
+        app:flow_wrapMode="chain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

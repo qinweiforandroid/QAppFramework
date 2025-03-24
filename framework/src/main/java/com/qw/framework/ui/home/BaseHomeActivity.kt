@@ -61,9 +61,11 @@ abstract class BaseHomeActivity : BaseActivity(), TabLayout.OnTabClickListener {
                 to = tab.clazz.getDeclaredConstructor().newInstance()
                 to.arguments = tab.args
                 if (from == null) {
-                    ft.add(R.id.mFragmentContainer,
+                    ft.add(
+                        R.id.mFragmentContainer,
                         to,
-                        newIndex.toString()).commitAllowingStateLoss()
+                        newIndex.toString()
+                    ).commitAllowingStateLoss()
                 } else {
                     ft.hide(from)
                         .add(R.id.mFragmentContainer, to, newIndex.toString())
@@ -90,14 +92,14 @@ abstract class BaseHomeActivity : BaseActivity(), TabLayout.OnTabClickListener {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         //应用被强杀 app不会走onNewIntent方法
-        val action = intent.getIntExtra(App.KEY_ACTION, App.ACTION_RESTART_APP)
+        val action = intent.getIntExtra(App.KEY_ACTION, App.ACTION_UNKNOWN)
         L.d("onNewIntent")
         when (action) {
-            App.ACTION_RESTART_APP  -> protectApp()
+            App.ACTION_RESTART_APP -> protectApp()
             App.ACTION_BACK_TO_HOME -> backToHome()
-            App.ACTION_KICK_OUT     -> kickOut()
-            App.ACTION_LOGOUT       -> logout()
-            else                    -> {
+            App.ACTION_KICK_OUT -> kickOut()
+            App.ACTION_LOGOUT -> logout()
+            else -> {
                 handlerAction(action, intent)
             }
         }
