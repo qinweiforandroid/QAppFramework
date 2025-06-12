@@ -21,6 +21,7 @@ import java.util.ArrayList;
  * @deprecated As of JDK version 1.0.0306
  * replaced by {@code BaseViewPager2Fragment}.
  */
+@Deprecated(since = "As of JDK version 1.0.0306")
 public abstract class BaseViewPagerFragment<T> extends BaseFragment implements ViewPager.OnPageChangeListener {
     protected DataPageAdapter adapter;
     protected ArrayList<T> modules = new ArrayList<>();

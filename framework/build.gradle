@@ -1,15 +1,14 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
-    compileSdk rootProject.ext.compileSdkVersion
+    compileSdk 34
     namespace 'com.qw.framework'
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-
+        minSdkVersion 21
+        targetSdkVersion 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
@@ -24,22 +23,22 @@ android {
         sourceCompatibility JavaVersion.VERSION_19
         targetCompatibility JavaVersion.VERSION_19
     }
-
 }
 
 dependencies {
-    api "androidx.appcompat:appcompat:$versions.appcompat"
-    api "com.google.android.material:material:$versions.material"
-
+    implementation libs.androidx.lifecycle.viewmodel.ktx
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.constraintlayout
     //核心组件（必须）
-    api 'com.github.qinweiforandroid.SmartRefreshRecyclerView:recyclerview-core:4.1.0324'
+    api libs.recyclerview.core
     //使用swiperefreshlayout库实现的下拉刷新（推荐）
-    api 'com.github.qinweiforandroid.SmartRefreshRecyclerView:recyclerview-swiperefresh:4.1.0324'
+    api libs.recyclerview.swiperefresh
     //用到加载更多需要引入
-    api 'com.github.qinweiforandroid.SmartRefreshRecyclerView:recyclerview-footer:4.1.0324'
-
+    api libs.recyclerview.footer
     //test
-    testImplementation "junit:junit:$versions.junit"
-    androidTestImplementation "androidx.test.ext:junit:$versions.androidx_junit"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espresso_core"
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
 }

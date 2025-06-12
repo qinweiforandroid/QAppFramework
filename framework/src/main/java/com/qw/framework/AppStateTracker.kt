@@ -60,9 +60,9 @@ object AppStateTracker {
                 }
             }
 
-            override fun onActivityCreated(activity: Activity, p1: Bundle?) {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                 activityLifecycleCallbacks.forEach {
-                    it.onActivityCreated(activity, p1)
+                    it.onActivityCreated(activity, savedInstanceState)
                 }
             }
 

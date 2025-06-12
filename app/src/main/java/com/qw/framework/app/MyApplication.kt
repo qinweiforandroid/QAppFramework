@@ -21,10 +21,7 @@ import java.util.concurrent.TimeUnit
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        App.init(
-            App.Builder(this)
-                .setDebug(BuildConfig.DEBUG)
-        )
+        App.init(App.Builder(this))
         initHttp()
     }
 
@@ -43,13 +40,11 @@ class MyApplication : Application() {
             .writeTimeout(5, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .apply {
-                if (BuildConfig.DEBUG) {
 //                    val loggingInterceptor = HttpLoggingInterceptor()
 //                    loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 //                    addInterceptor(loggingInterceptor)
-                    addInterceptor(requestInterceptor)
+                addInterceptor(requestInterceptor)
 //                    addInterceptor(responseInterceptor)
-                }
             }
         RequestManager.putOkHttpClient(API.domain, okHttp.build())
     }
