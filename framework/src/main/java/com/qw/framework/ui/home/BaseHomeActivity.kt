@@ -118,6 +118,7 @@ abstract class BaseHomeActivity : BaseActivity(), TabLayout.OnTabClickListener {
     open fun backToHome() {}
 
     open fun categoryHome() = false
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (categoryHome()) {
             //模拟点击home键
