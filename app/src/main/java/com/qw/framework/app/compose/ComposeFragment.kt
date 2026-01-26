@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.tooling.preview.Preview
+import com.qw.framework.app.compose.theme.ComposeTheme
 import com.qw.framework.ui.BaseFragment
 
 /**
@@ -39,7 +42,12 @@ class ComposeFragment : BaseFragment() {
     @Composable
     @Preview(showBackground = true)
     private fun PreviewHelloCompose() {
-        HelloCompose()
+        val selectedIndex = remember { mutableStateOf(0) }
+        ComposeTheme() {
+            BottomBar(selectedIndex.value) {
+                selectedIndex.value = it
+            }
+        }
     }
 
     override fun initData() {
