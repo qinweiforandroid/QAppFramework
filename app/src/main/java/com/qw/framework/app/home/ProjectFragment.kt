@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.qw.framework.app.compose.ComposeFragment
 import com.qw.framework.app.dialog.TestDialogFragment
+import com.qw.framework.app.guide.GuideTestFragment
 import com.qw.framework.app.pick.PickPhotoFragment
 import com.qw.framework.ui.BaseListFragment
 import com.qw.framework.ui.tools.ContainerClazz
@@ -26,6 +27,7 @@ class ProjectFragment : BaseListFragment<ContainerClazz>() {
         modules.add(ContainerClazz("PhotoPick", PickPhotoFragment::class.java))
         modules.add(ContainerClazz("Compose", ComposeFragment::class.java))
         modules.add(ContainerClazz("Dialog", TestDialogFragment::class.java))
+        modules.add(ContainerClazz("Guide", GuideTestFragment::class.java))
         adapter.notifyDataSetChanged()
     }
 
