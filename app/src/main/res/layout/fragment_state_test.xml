@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/stateContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.8"
+        android:padding="32dp"
+        android:text="静夜思\n\n床前明月光，\n疑是地上霜。\n举头望明月，\n低头思故乡。\n\n—— 李白"
+        android:textColor="#1A1A2E"
+        android:textSize="20sp"
+        android:fontFamily="serif"
+        android:background="#F5F0E8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/flowButtons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading" />
+
+    <Button
+        android:id="@+id/btnEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Empty" />
+
+    <Button
+        android:id="@+id/btnError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error" />
+
+    <Button
+        android:id="@+id/btnContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowButtons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:constraint_referenced_ids="btnLoading,btnEmpty,btnError,btnContent"
+        app:flow_horizontalGap="12dp"
+        app:flow_verticalGap="12dp"
+        app:flow_wrapMode="chain"
+        app:flow_horizontalStyle="packed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.qw.framework.webvew;
+package com.qw.framework.webview;
 
 import android.net.Uri;
 import android.text.TextUtils;

@@ -1,11 +1,11 @@
-package com.qw.framework.webvew;
+package com.qw.framework.webview;
 
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
 
 import androidx.collection.ArrayMap;
 
-import com.qw.framework.webvew.annotation.JsHandler;
+import com.qw.framework.webview.annotation.JsHandler;
 
 import java.lang.reflect.InvocationTargetException;
 

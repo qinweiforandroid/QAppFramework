@@ -1,4 +1,4 @@
-package com.qw.framework.webvew.annotation;
+package com.qw.framework.webview.annotation;
 
 
 import java.lang.annotation.ElementType;

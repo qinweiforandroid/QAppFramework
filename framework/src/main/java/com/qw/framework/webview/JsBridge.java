@@ -1,4 +1,4 @@
-package com.qw.framework.webvew;
+package com.qw.framework.webview;
 
 import android.annotation.SuppressLint;
 import android.webkit.ValueCallback;

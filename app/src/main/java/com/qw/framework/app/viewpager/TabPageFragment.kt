@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.qw.framework.app.R
-import com.qw.framework.app.status.LoadingStatus
-import com.qw.framework.page.PageStatus
-import com.qw.framework.page.StateFrameLayout
+import com.qw.framework.app.state.LoadingState
+import com.qw.framework.page.PageStateLayout
+import com.qw.framework.page.PageStateWrapper
 import com.qw.framework.ui.BaseFragment
 import com.qw.framework.uitls.L
 
@@ -15,7 +15,7 @@ import com.qw.framework.uitls.L
  * email: qinwei_it@163.com
  */
 class TabPageFragment : BaseFragment(R.layout.tab_page_fragment) {
-    private lateinit var pageStatus: StateFrameLayout
+    private lateinit var pageStatus: PageStateLayout
     private lateinit var mPageLabel: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +25,8 @@ class TabPageFragment : BaseFragment(R.layout.tab_page_fragment) {
 
     override fun initView(view: View) {
         mPageLabel = findViewById(R.id.mPageLabel)
-        pageStatus = PageStatus.wrap(mPageLabel)
-        pageStatus.show(LoadingStatus())
+        pageStatus = PageStateWrapper.wrap(mPageLabel)
+        pageStatus.show(LoadingState())
     }
 
     override fun initData() {
@@ -34,7 +34,7 @@ class TabPageFragment : BaseFragment(R.layout.tab_page_fragment) {
         L.d("initData $title")
         mPageLabel.text = title
         mPageLabel.postDelayed({
-            pageStatus.showTarget()
+            pageStatus.showContent()
         }, 200)
     }
 }
