@@ -9,6 +9,7 @@ import com.qw.framework.app.dialog.TestDialogFragment
 import com.qw.framework.app.guide.GuideTestFragment
 import com.qw.framework.app.pick.PickPhotoFragment
 import com.qw.framework.app.state.StateFragment
+import com.qw.framework.app.theme.ThemeFragment
 import com.qw.framework.ui.BaseListFragment
 import com.qw.framework.ui.tools.ContainerClazz
 import com.qw.framework.ui.tools.ContainerFragmentActivity
@@ -25,6 +26,7 @@ class ProjectFragment : BaseListFragment<ContainerClazz>() {
     override fun initView(view: View) {
         super.initView(view)
         smart.setLayoutManager(getGridLayoutManager(2))
+        modules.add(ContainerClazz("Theme", ThemeFragment::class.java))
         modules.add(ContainerClazz("PhotoPick", PickPhotoFragment::class.java))
         modules.add(ContainerClazz("Compose", ComposeFragment::class.java))
         modules.add(ContainerClazz("Dialog", TestDialogFragment::class.java))

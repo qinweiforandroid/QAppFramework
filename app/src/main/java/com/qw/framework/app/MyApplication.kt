@@ -4,6 +4,9 @@ import android.app.Application
 import com.qw.framework.App
 import com.qw.framework.app.repository.API
 import com.qw.framework.app.repository.RequestManager
+import com.qw.framework.theme.BrandTheme
+import com.qw.framework.theme.SharedPreferencesThemeRepository
+import com.qw.framework.theme.ThemeManager
 import com.qw.network.env.AbstractHost
 import com.qw.network.env.Env
 import okhttp3.Authenticator
@@ -22,7 +25,28 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         App.init(App.Builder(this))
+        initTheme()
         initHttp()
+    }
+
+    private fun initTheme() {
+        ThemeManager.init(SharedPreferencesThemeRepository(this))
+        ThemeManager.registerThemes(
+            listOf(
+                BrandTheme(
+                    id = "default",
+                    name = "默认主题",
+                    styleRes = R.style.Theme_QAppFramework
+                ),
+                BrandTheme(
+                    id = "ocean",
+                    name = "海洋蓝",
+                    styleRes = R.style.Theme_QAppFramework_Ocean
+                )
+            )
+        )
+        ThemeManager.applyNightMode()
+        ThemeManager.setCurrentThemeIfAbsent("default")
     }
 
     private fun initHttp() {

@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.qw.framework.App;
 import com.qw.framework.R;
-import com.qw.framework.ThemeCompat;
+import com.qw.framework.theme.ThemeManager;
 import com.qw.framework.uitls.L;
 
 import java.util.Objects;
@@ -36,8 +36,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         d("onCreate");
-        super.onCreate(savedInstanceState);
         setCustomTheme();
+        super.onCreate(savedInstanceState);
         d("后台强杀保护开启状态:" + App.isProtectEnabled());
         if (protect()) {
             protectApp();
@@ -54,7 +54,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void setCustomTheme() {
-        ThemeCompat.setTheme(this);
+        Integer styleRes = ThemeManager.getCurrentThemeStyleRes();
+        if (styleRes != null) {
+            setTheme(styleRes);
+        }
     }
 
     /**
